@@ -6,32 +6,44 @@ Please visit the [installation instructions](http://hyperledger-fabric.readthedo
 
 ## How to use this on Mac OS X
 
+#### 事前準備
+- gitコマンドのインストール
+- GO 1.8以上のインストール
+- curlコマンドのインストール(brew install curl)
+- Dockerのインストール
+
 1. /tmpディレクトリにfabric-samplesをクローンして、バイナリファイルやdockerイメージを導入します。
 
 ```
 cd /tmp
 git clone https://github.com/hyperledger/fabric-samples.git``
 cd fabric-samples/
-curl -sSL https://goo.gl/PabWJX | bash
+curl -sSL https://goo.gl/iX9dek | bash
 export PATH=$PWD/bin:$PATH # ダウンロードしたbinフォルダ下のpeerコマンドなどにパスを通します。
 ```
 
-2. first-networkディレクトリに移動して、"byfn.sh -m up"を実行し、テストスクリプトを実行します。
+2. $GOPATHにfabricをcloneします。fabric1.0.0ではこれをしないと1でダウンロードしたpeerコマンドを実行するときcore.configがないと怒られます。どうぜchaincodeのサンプルを動かすのでここでクローンしておきましょう。
 
 ```
-cd first-network/ 
-./byfn.sh -m generate
+cd $GOPATH/src/github.com/hyperledger
+git clone http://github.com/hyperledger/fabric
+```
+
+3. first-networkディレクトリに移動して、"byfn.sh -m up"を実行し、テストスクリプトを実行します。
+
+```
+cd first-network/
 ./byfn.sh -m up  # ENDと出たらCtrl+Cで脱出。
 ```
 
-3. "byfn.sh -m generate"を実行して、crypto-configフォルダ（証明書）とchannel-artifactsフォルダ下のファイル（genesis）を作成します。
+4. "byfn.sh -m generate"を実行して、crypto-configフォルダ（証明書）とchannel-artifactsフォルダ下のファイル（genesis）を作成します。
 
 ```
 ./byfn.sh -m down
 ./byfn.sh -m generate
 ```
 
-4. cliコンテナが起動しないようdocker-compose.yamlを編集します。
+5. cliコンテナが起動しないようdocker-compose.yamlを編集します。
 
 ```
 cp docker-compose-cli.yaml docker-compose.yaml
@@ -86,11 +98,9 @@ peer channel create -o orderer.example.com:7050 -c mychannel -f ./channel-artifa
 peer channel join -b mychannel.block
 ```
 
-9. $GOPATH下にgithub.com/.../chaincode_example02を配置し、chaincodeをインストールします。
+9. $GOPATH下にあるサンプルchaincodeである "github.com/.../chaincode_example02" をインストールします。
 
 ```
-cd $GOPATH
-git clone https://github.com/hyperledger/fabric.git
 peer chaincode install -n mycc -v 1.0 -p github.com/hyperledger/fabric/examples/chaincode/go/chaincode_example02
 ```
 
