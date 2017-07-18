@@ -32,8 +32,8 @@ git clone http://github.com/hyperledger/fabric
 3. first-networkディレクトリに移動して、"byfn.sh -m up"を実行し、テストスクリプトを実行します。
 
 ```
-cd first-network/
-./byfn.sh -m up  # ENDと出たらCtrl+Cで脱出。
+cd /tmp/fabric-samples/first-network/
+./byfn.sh -m up  # yを押下して実行。ENDと出たら成功。Ctrl+Cで脱出。
 ```
 
 4. "byfn.sh -m generate"を実行して、crypto-configフォルダ（証明書）とchannel-artifactsフォルダ下のファイル（genesis）を作成します。
