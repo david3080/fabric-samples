@@ -16,7 +16,7 @@ Please visit the [installation instructions](http://hyperledger-fabric.readthedo
 
 ```
 cd /tmp
-git clone https://github.com/hyperledger/fabric-samples.git``
+git clone https://github.com/hyperledger/fabric-samples.git
 cd fabric-samples/
 curl -sSL https://goo.gl/iX9dek | bash
 export PATH=$PWD/bin:$PATH # ダウンロードしたbinフォルダ下のpeerコマンドなどにパスを通します。
